@@ -49,10 +49,10 @@ describe 'Expectation Matchers' do
       expect(1 < 2).to be_truthy
       expect(1 > 2).to be_falsey
 
-      expect('foo').to be_truthy
+      expect('foo').to be_truthy # anything that isnt false or nil will be considered truthy
 
       expect(nil).to be_falsey
-      expect(0).not_to be_falsey
+      expect(0).not_to be_falsey # 0 is still not falsey enough
     end
 
     it 'will match nil' do
