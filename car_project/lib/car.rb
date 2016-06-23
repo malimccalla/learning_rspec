@@ -6,7 +6,7 @@ class Car
 
   def initialize(options={})
     self.make = options[:make] || 'Volvo'
-    self.year = (options[:year] || 2007).to_i
+    self.year = (options[:year] || 2016).to_i
     self.color = options[:color] || 'unknown'
     @wheels = 4
   end

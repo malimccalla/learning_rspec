@@ -48,7 +48,7 @@ describe 'Car' do
     context "when initialized with no arguments" do
       it "returns a string using default values" do
         car = Car.new
-        expect(car.full_name).to eq("2007 Volvo (unknown)")
+        expect(car.full_name).to eq("2016 Volvo (unknown)")
       end
     end
 
