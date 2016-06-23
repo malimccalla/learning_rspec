@@ -1,8 +1,8 @@
 require 'car'
 
-describe 'car' do
+describe 'Car' do
 
-  context 'attributes' do
+  describe 'attributes' do
 
     it "allows reading and writing for :make" do
       car = Car.new
@@ -25,6 +25,31 @@ describe 'car' do
     it "allows reading for :wheels" do
       car = Car.new
       expect(car.wheels).to eq(4)
+    end
+
+  end
+
+  describe '.colors' do
+
+    it "it returns an array of color names" do
+      c = ['blue', 'black', 'red', 'green']
+      expect(Car.colors).to match_array(c)
+    end
+
+  end
+
+  describe '#full_name' do
+
+    it "returns a string in the expected format" do
+      @honda = Car.new(make: 'Honda', year: 2016, color: 'blue')
+      expect(@honda.full_name).to eq('2016 Honda (blue)')
+    end
+
+    context "when initialized with no arguments" do
+      it "returns a string using default values" do
+        car = Car.new
+        expect(car.full_name).to eq("2007 Volvo (unknown)")
+      end
     end
 
   end
