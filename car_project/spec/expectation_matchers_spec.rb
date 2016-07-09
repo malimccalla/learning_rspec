@@ -87,5 +87,84 @@ describe 'Expectation Matchers' do
 
   end
 
+  describe 'collection matchers' do
+
+    it 'will match arrays' do
+      array = [1,2,3]
+
+      expect(array).to include(3)
+      expect(array).to include(1,3)
+
+      expect(array).to start_with(1)
+      expect(array).to end_with(3)
+
+      expect(array).to match_array([3,2,1]) #same elements any order
+      expect(array).not_to match_array([1,2])
+
+      expect(array).to contain_exactly(3,2,1) #exactly what the arr contains, any order
+      expect(array).not_to contain_exactly(1,2)
+
+    end
+
+    it 'will match strings' do
+      string = "Mali"
+
+      expect(string).to include("al")
+      expect(string).not_to include("Mli") #has to be in order
+      expect(string).to start_with("Ma")
+      expect(string).to end_with("li")
+
+    end
+
+    it 'will match hashes' do
+      hash = {name: "Mali", age: 23}
+
+      expect(hash).to include(:name)
+      expect(hash).not_to include("Mali") #cant search by value
+      expect(hash).to include(name: "Mali") # can search by both
+
+    end
+
+  end
+
+  describe 'other usful matchers' do
+
+    it 'will match a string with regular expression' do
+      expect("Mali").to match(/[A-Za-z]/)
+      expect("someone@example.com").to match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/) #regex for valid email
+    end
+
+    it 'will match object types' do
+      expect("Hello").to be_a(String)
+      expect("Hello").to be_an_instance_of(String)
+      expect([1,2,3]).to be_an(Array)
+    end
+
+    it 'will match objects with #respond_to' do
+      string ='test'
+      expect(string).to respond_to(:length)
+      expect(string).not_to respond_to(:sort)
+    end
+
+    it 'will match class instances with #have_attribute' do
+      class Car
+        attr_accessor :make, :year
+      end
+      car = Car.new
+      car.make = 'VW'
+      car.year = 2016
+
+      expect(car).to have_attributes(make: 'VW')
+      expect(car).to have_attributes(make: 'VW', year: 2016)
+    end
+
+    it 'will match anything with #satisfy' do
+      #this is the most flexible matcher
+      expect(10).to satisfy do |value|
+        (value >= 5) && (value <= 10) && (value.even?)
+      end
+    end
+
+  end
 
 end
