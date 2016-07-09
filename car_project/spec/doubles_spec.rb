@@ -1,19 +1,18 @@
 describe 'Doubles' do
 
+  let(:dbl) {double("Chant")}
+
   it 'allows stubbing methods' do
-    dbl = double("Chant")
     allow(dbl).to receive(:hey!)
     expect(dbl).to respond_to(:hey!)
   end
 
   it 'allows stubbing a response with a block' do
-    dbl = double("Chant")
     allow(dbl).to receive(:hey!) {"Ho!"} #when i say hey you say ho!
     expect(dbl.hey!).to eq("Ho!")
   end
 
   it 'allows stubbing responses with #and_return' do
-    dbl = double("Chant")
     allow(dbl).to receive(:hey!).and_return("Ho!")
   end
 
